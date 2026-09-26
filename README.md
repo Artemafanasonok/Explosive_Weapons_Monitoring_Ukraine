@@ -6,7 +6,7 @@ Analysis of explosive weapons incidents, civilian casualties, and infrastructure
 
 This is an independent data analytics portfolio project focused on the impact of explosive weapons incidents on civilians and civilian infrastructure in Ukraine.
 
-The analysis covers incidents recorded in Ukraine from 2020 to August 2026, with the main focus on the full-scale invasion period starting on 24 February 2022.
+The analysis covers incidents recorded in Ukraine from 2020 to the latest available date in the source dataset, with the main focus on the full-scale invasion period starting on 24 February 2022.
 
 The project demonstrates an end-to-end analytics workflow, from raw humanitarian data preparation and transformation to data modeling, DAX calculations, and interactive Power BI dashboards.
 
@@ -27,7 +27,7 @@ The project uses the **Explosive Weapons Monitoring Data** dataset available thr
 
 The underlying data combines reported incidents involving explosive weapons with information about affected sectors, infrastructure, geographic locations, and casualties.
 
-The source methodology notes that the dataset does not represent every incident or casualty and that reporting can vary depending on available sources, access, and reporting networks. Incidents may also affect multiple sectors simultaneously. :contentReference[oaicite:0]{index=0}
+The dataset does not represent every incident or casualty. Reporting coverage can vary depending on available sources, access, and reporting networks. A single incident may also affect multiple sectors.
 
 ## Tools
 
@@ -49,14 +49,14 @@ Key preparation steps included:
 - Mapping regional names to standardized administrative codes.
 - Handling missing and undefined values.
 - Creating infrastructure impact fields.
-- Combining relevant casualty fields into a total recorded casualties measure.
+- Combining relevant casualty fields into a total recorded killed measure.
 - Preparing the data for geographic visualization in Power BI.
 
 ## Data Model
 
 The Power BI model follows a simple star-schema approach.
 
-### Fact table
+### Fact Table
 
 `fact_events`
 
@@ -70,7 +70,7 @@ Contains incident-level records, including:
 - Casualty information
 - War period
 
-### Dimension tables
+### Dimension Tables
 
 `dim_regions`
 
@@ -103,9 +103,9 @@ The Power BI report consists of:
 
 ### Dashboard 1 — Overview
 
-The overview dashboard provides a high-level view of recorded explosive weapons incidents in Ukraine.
+The Overview dashboard provides a high-level view of recorded explosive weapons incidents in Ukraine.
 
-Key elements include:
+It includes:
 
 - Total Events
 - Education Infrastructure Strikes
@@ -117,7 +117,7 @@ Key elements include:
 - Geographic distribution by administrative unit
 - Interactive filters for Date, War Period, Admin Unit, and Infrastructure Type
 
-The map includes a custom tooltip providing additional regional information, including event count, recorded casualties, and number of weapon types.
+The map includes a custom tooltip providing additional regional information, including event count, recorded killed, and number of weapon types.
 
 ### Dashboard 2 — Civilian & Infrastructure Impact
 
@@ -139,7 +139,7 @@ It includes:
 
 The scatter chart allows users to explore differences between administrative regions and drill through to a detailed regional view.
 
-The civilian casualties chart shows recorded casualties associated with incidents affecting different infrastructure categories. A single incident may affect multiple infrastructure types, so these categories should not be interpreted as mutually exclusive.
+The civilian casualties chart shows recorded killed associated with incidents affecting different infrastructure categories. A single incident may affect multiple infrastructure types, so these categories should not be interpreted as mutually exclusive.
 
 ### Detail Page
 
@@ -166,24 +166,24 @@ It provides a more detailed breakdown by administrative unit, including:
 The analysis highlights several patterns within the recorded data:
 
 - **5,353 unique explosive weapons incidents** are recorded for Ukraine in the analyzed dataset.
-- Recorded incidents are distributed unevenly across administrative regions, with substantial differences in both event frequency and recorded casualties.
-- **Health care** represents the largest category in the recorded casualty breakdown, with **291 casualties**, followed by **Aid Operations — 35** and **Education — 13**.
+- Recorded incidents are distributed unevenly across administrative regions, with substantial differences in both event frequency and recorded killed.
+- **Health Care** represents the largest category in the recorded casualty breakdown, with **291 recorded killed**, followed by **Aid Operations — 35** and **Education — 13**.
 - Infrastructure-related incidents span multiple sectors, including healthcare, education, aid operations, food systems, water systems, and protection-related infrastructure.
-- The relationship between the number of recorded incidents and casualties varies by region, demonstrating that incident frequency alone does not describe the full scale of recorded human impact.
+- The relationship between the number of recorded incidents and recorded killed varies by region, demonstrating that incident frequency alone does not describe the full scale of recorded human impact.
 - The dataset includes information from multiple information providers, reflecting the multi-source nature of humanitarian incident monitoring.
 
 ## Limitations
 
 The analysis should be interpreted within the limitations of the underlying dataset.
 
-The source methodology states that reported incidents are not a complete or representative list of all explosive weapons incidents. Coverage can vary depending on media reporting, local information networks, access constraints, and other characteristics of the information environment. Some incidents can also overlap across sectors. :contentReference[oaicite:1]{index=1}
+The reported incidents are not a complete or representative list of all explosive weapons incidents. Coverage can vary depending on media reporting, local information networks, access constraints, and other characteristics of the information environment.
 
 Therefore:
 
 - The reported figures should not be interpreted as a complete count of all incidents or casualties.
 - Differences between regions may partly reflect differences in reporting coverage.
 - Infrastructure categories are not necessarily mutually exclusive.
-- Recorded casualties should not automatically be interpreted as causal estimates attributable to a specific infrastructure category.
+- Recorded killed should not automatically be interpreted as causal estimates attributable to a specific infrastructure category.
 - Missing or undefined information may affect individual records and aggregated results.
 
 ## Disclaimer
@@ -197,20 +197,18 @@ All findings are based on the underlying humanitarian dataset and its methodolog
 ## Project Structure
 
 ```text
-explosive-weapons-monitoring-ukraine/
+Explosive_Weapons_Monitoring_Ukraine/
 │
 ├── README.md
 │
-├── sql/
-│   ├── fact_events.sql
-│   └── dim_regions.sql
-│
-├── powerbi/
+├── PowerBI/
 │   └── explosive_weapons_monitoring.pbix
 │
-├── screenshots/
-│   ├── dashboard_overview.png
-│   └── dashboard_infrastructure.png
+├── Screenshots/
+│   ├── Overview.png
+│   └── Civilian's & Infrastructure Impact.png
+│   └── Detail Page.png
 │
-└── data/
-    └── README.md
+└── sql/
+    ├── fact_events.sql
+    └── dim_regions.sql
